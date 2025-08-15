@@ -7,13 +7,11 @@ import java.util.Vector;
 
 public class UniversityERP {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());
-            } catch (Exception e) {
-                e.printStackTrace();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                // Skip look and feel setting to avoid compatibility issues
+                new LoginFrame();
             }
-            new LoginFrame();
         });
     }
 }
@@ -22,7 +20,7 @@ public class UniversityERP {
 class DatabaseConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/university_erp";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "password"; // Change this to your MySQL password
+    private static final String PASSWORD = "cp7kvt"; // Change this to your MySQL password
     
     public static Connection getConnection() throws SQLException {
         try {
@@ -199,8 +197,16 @@ class LoginFrame extends JFrame {
         JButton loginButton = new JButton("Login");
         JButton exitButton = new JButton("Exit");
         
-        loginButton.addActionListener(e -> login());
-        exitButton.addActionListener(e -> System.exit(0));
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                login();
+            }
+        });
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
         
         buttonPanel.add(loginButton);
         buttonPanel.add(exitButton);
@@ -264,11 +270,31 @@ class MainFrame extends JFrame {
         JButton refreshButton = new JButton("Refresh");
         JButton logoutButton = new JButton("Logout");
         
-        addButton.addActionListener(e -> showAddStudentDialog());
-        editButton.addActionListener(e -> showEditStudentDialog());
-        deleteButton.addActionListener(e -> deleteStudent());
-        refreshButton.addActionListener(e -> loadStudentData());
-        logoutButton.addActionListener(e -> logout());
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showAddStudentDialog();
+            }
+        });
+        editButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showEditStudentDialog();
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deleteStudent();
+            }
+        });
+        refreshButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                loadStudentData();
+            }
+        });
+        logoutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                logout();
+            }
+        });
         
         topPanel.add(addButton);
         topPanel.add(editButton);
@@ -599,8 +625,16 @@ class StudentDialog extends JDialog {
         JButton saveButton = new JButton(isEdit ? "Update" : "Save");
         JButton cancelButton = new JButton("Cancel");
         
-        saveButton.addActionListener(e -> saveStudent());
-        cancelButton.addActionListener(e -> dispose());
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                saveStudent();
+            }
+        });
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
         
         buttonPanel.add(saveButton);
         buttonPanel.add(cancelButton);
