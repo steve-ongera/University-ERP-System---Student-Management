@@ -77,7 +77,7 @@ A comprehensive Java desktop application for managing university student records
 
 3. **Run the application**:
    ```bash
-   java -cp ".:mysql-connector-java-8.0.33.jar" UniversityERP
+    java -cp ".;mysql-connector-j-9.4.0.jar" UniversityERP
    ```
    
    On Windows:
